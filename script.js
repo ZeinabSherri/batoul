@@ -10,26 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Form validation example (you can customize this based on your form structure)
-    const form = document.getElementById('contactForm');
-
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        // Simple validation example (you can add more sophisticated validation)
-        const nameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
-
-        if (nameInput.value.trim() === '' || emailInput.value.trim() === '') {
-            alert('Name and Email are required fields.');
-            return;
-        }
-
-        // If validation passes, you can submit the form or perform other actions
-        alert('Form submitted successfully!');
-        // You may want to use AJAX to submit the form data asynchronously
-    });
-
     // Drag-and-drop functionality
     const draggableElement = document.getElementById('draggable');
     const dropzone = document.getElementById('dropzone');
@@ -63,4 +43,41 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     });
+
+    // Toggle Dark Mode
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    darkModeToggle.addEventListener('click', function () {
+        body.classList.toggle('dark-mode');
+    });
+
+    // Show/Hide Elements
+    const toggleElementsButton = document.getElementById('toggleElements');
+    const elementsToToggle = document.querySelectorAll('.toggleable-element');
+
+    toggleElementsButton.addEventListener('click', function () {
+        elementsToToggle.forEach(element => {
+            element.classList.toggle('hidden');
+        });
+    });
+
+    // Countdown Timer
+    const countdownDisplay = document.getElementById('countdownTimer');
+
+    function updateCountdown() {
+        const eventDate = new Date('2024-12-31T23:59:59');
+        const currentDate = new Date();
+        const timeDifference = eventDate - currentDate;
+
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        countdownDisplay.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    // Update countdown every second
+    setInterval(updateCountdown, 1000);
 });
